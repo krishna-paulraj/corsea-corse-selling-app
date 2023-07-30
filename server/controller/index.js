@@ -45,8 +45,6 @@ async function getUserByIdAndDelete(req, res) {
 async function createUser(req, res) {
   const body = req.body;
 
-  console.log(body.first_name);
-
   if (!body.first_name || !body.last_name || !body.email || !body.password) {
     return res.status(400).json({ message: "All fields are required !!" });
   }
