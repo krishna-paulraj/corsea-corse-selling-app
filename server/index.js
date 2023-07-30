@@ -1,12 +1,16 @@
+require("dotenv").config();
+
+const PORT = process.env.PORT;
+const dbHost = process.env.DB_HOST;
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const { connectDb } = require("./db/connection");
 const userRouter = require("./routes/user");
 
 const app = express();
-const PORT = 3000;
 
-connectDb("mongodb://localhost:27017/Corsea"); // Database Connection
+connectDb(dbHost); // Database Connection
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
