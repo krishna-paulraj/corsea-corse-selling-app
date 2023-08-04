@@ -49,6 +49,11 @@ async function createUser(req, res) {
     return res.status(400).json({ message: "All fields are required !!" });
   }
 
+  const c_email = await User.findOne({ email: body.email });
+
+  if (c_email)
+    return res.status(401).json({ message: "Email Already Registered" });
+
   const result = await User.create({
     first_name: body.first_name,
     last_name: body.last_name,
@@ -56,7 +61,7 @@ async function createUser(req, res) {
     password: body.password,
   });
 
-  res.status(201).json({ message: "User Created" }, result);
+  res.status(201).json({ message: "User Created" });
 }
 
 module.exports = {
